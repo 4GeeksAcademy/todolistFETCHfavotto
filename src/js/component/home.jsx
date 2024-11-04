@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from "react";
 
 const Home = () => {
-	const [task, setTask] = useState("");
+	const [task, setTask] = useState({ label: "", done: false });
 	const [tasks, setTasks] = useState([]);
 
-	
 	useEffect(() => {
 		fetchTasks();
 	}, []);
 
-	
 	const fetchTasks = async () => {
 		console.log("Fetching tasks...");
 		try {
@@ -28,7 +26,6 @@ const Home = () => {
 		}
 	};
 
-	
 	const syncTasks = async (todos) => {
 		console.log("Synchronizing tasks to server...");
 		try {
@@ -46,24 +43,21 @@ const Home = () => {
 		}
 	};
 
-	
 	const addTask = async (e) => {
-		if (e.key === "Enter" && task !== "") {
-			const newTask = { id: tasks.length, label: task, done: false };
+		if (e.key === "Enter" && task.label !== "") {
+			const newTask = { id: tasks.length, ...task };
 			const updatedTasks = [...tasks, newTask];
 			setTasks(updatedTasks);
-			setTask("");
+			setTask({ label: "", done: false });
 			await syncTasks(updatedTasks); 
 		}
 	};
 
-	
 	const removeTask = async (id) => {
 		const updatedTasks = tasks.filter((item) => item.id !== id);
 		setTasks(updatedTasks);
 		await syncTasks(updatedTasks); 
 	};
-
 
 	const clearAllTasks = async () => {
 		const emptyTasks = [];
@@ -77,9 +71,9 @@ const Home = () => {
 			<div className="card">
 				<div className="input-group">
 					<input
-						onChange={(e) => setTask(e.target.value)}
+						onChange={(e) => setTask({ ...task, label: e.target.value })}
 						onKeyDown={addTask}
-						value={task}
+						value={task.label}
 						type="text"
 						className="form-control"
 						placeholder="Pendientes"
