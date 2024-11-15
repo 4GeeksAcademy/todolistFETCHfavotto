@@ -28,8 +28,6 @@ export const List = ({ todos, setTodos, deleteTodo }) => {
         });
 
         if (response.ok) {
-            const data = await response.json();
-            return data;
         } else {
             console.log('Error: ', response.status, response.statusText);
             return {
