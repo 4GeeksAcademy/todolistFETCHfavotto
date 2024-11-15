@@ -10,7 +10,7 @@ const Home = () => {
 	}
 	useEffect(() => {
 		async function createUser() {
-			let response = await fetch("https://playground.4geeks.com/todo/users/aless")
+			let response = await fetch("https://playground.4geeks.com/todo/users/alessf")
 			let data = await response.json()
 			if (data.detail == "Agenda \"alessf\" doesn't exist.") {
 				let response = await fetch("https://playground.4geeks.com/todo/users/alessf", {
