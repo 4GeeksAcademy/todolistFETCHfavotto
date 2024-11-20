@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-export const Input = ({ todos, setTodos }) => {
+export const Input = ({ todos, setTodos, getData }) => {
 
     const [inputText, setInputText] = useState("")
 
@@ -31,9 +31,8 @@ export const Input = ({ todos, setTodos }) => {
     const addTask = (e) => {
         if (e.key === "Enter" && inputText.trim() !== "") {
             const newTodoObject = { label: inputText, is_done: false };
-            const newTodos = [...todos, newTodoObject];
-            setTodos(newTodos);
             addTodo(newTodoObject);
+            getData();
             setInputText("");
         }
     }
