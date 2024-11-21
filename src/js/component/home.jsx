@@ -10,7 +10,7 @@ const Home = () => {
         const newTodos = todos.filter((_, i) => i !== index);
 
         try {
-            const response = await fetch("https://playground.4geeks.com/todo/users/alessf", {
+            const response = await fetch("https://playground.4geeks.com/todo/todos/0", {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(newTodos),
